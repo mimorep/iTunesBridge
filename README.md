@@ -2,6 +2,8 @@
 
 ITunesBridge is a PowerShell script that is able to generate a temporal o permanent bridge, in order to change the iTunes backup output.
 
+![image](https://user-images.githubusercontent.com/43792651/190635373-6e294439-8f2a-42ab-b068-575a59f1a6c1.png)
+
 # Installation
 
 In order to get this program working, clone this repository if you want the raw PowerShell script.
