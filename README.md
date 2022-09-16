@@ -1,3 +1,5 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fmimorep%2FiTunesBridge&count_bg=%23555555&title_bg=%23555555&icon=mediafire.svg&icon_color=%23FF914C&title=Views&edge_flat=false)](https://hits.seeyoufarm.com)
+
 # iTunesBridge
 
 ITunesBridge is a PowerShell script that is able to generate a temporal o permanent bridge, in order to change the iTunes backup output.
