@@ -33,8 +33,10 @@ function ChangePath
     Write-Host "Disks of the system: "
     Write-Host ""
 
-    $Disks = Get-WmiObject -Class Win32_LogicalDisk | ? {$_.DriveType -eq 3} | Format-Table DeviceId, VolumeName, @{n="FreeSpace (GB)";e={[math]::Round($_.FreeSpace/1GB,2)}}
+    Get-WmiObject -Class Win32_LogicalDisk | Format-Table DeviceId, VolumeName, @{n="FreeSpace (GB)";e={[math]::Round($_.FreeSpace/1GB,2)}}
     [int] $count = 0
+
+    $OutputLetter = Read-Host "Select the DevideId"
 
     if ($temporal)
     {
@@ -50,7 +52,65 @@ function ChangePath
     }
     else
     {
-        
+        # Permanent link
+        Write-Host " "
+        $UserResponse = Read-Host "The permanent link will be created in the next path"$OutputLetter":\iTunesBridge is correct? (Y/N)"
+        if ($UserResponse -eq "Y")
+        {
+            Write-Host ""
+
+            $ApplePath = "C:\Users\" + $UserToOperate + "\AppData\Roaming\Apple Computer\MobileSync"
+            $FolderContent = Get-ChildItem -Path $ApplePath -Force -Recurse -ErrorAction 'silentlycontinue' | Where { $_.Attributes -match "ReparsePoint"}
+
+            if ($FolderContent.Length > 0)
+            {
+                if ($FolderContent[0].name -eq "Backup")
+                {
+                    $UserResponse = Read-Host "Bridge already exists, Whant to delete it? (Y/N)"
+                    Write-Host " "
+                    if ($UserResponse -eq "Y")
+                    {
+                        Write-Warning "Creating a new bridge will delete all the backups!"
+                        Write-Host " "
+                        $UserResponse = Read-Host "Whant to save the data before creating a new Bridge? (Y/N)"
+                        if ($UserResponse -eq "Y")
+                        {
+                            # Rename the folder to name-old, to save it
+                            Rename-Item $ApplePath"\Backup" "Old-Backup"
+                        }
+                        else 
+                        {
+                            # Delete the folder
+                            Remove-Item $ApplePath"\Backup" -Recurse
+                        }
+
+                        # Create the bridge
+                        New-Item -ItemType Junction -Path $ApplePath"\Backup" -Target $OutputLetter":\iTunesBridge"
+                        Write-Host ""
+                        Write-Host "Bridge created in"$OutputLetter":\iTunesBridge" -ForegroundColor Green
+                        Break
+                    }
+                }
+                else
+                {
+                    Write-Host "No bridges present for this user"
+                }
+            }
+            else
+            {
+                # Empty folder
+                # Create the bridge
+                New-Item -ItemType Junction -Path $ApplePath"\Backup" -Target $OutputLetter":\iTunesBridge"
+                Write-Host ""
+                Write-Host "Bridge created in"$OutputLetter":\iTunesBridge" -ForegroundColor Green
+                Break
+            }
+
+        }
+        else 
+        {
+            ChangePath
+        }
     }
 
 }
@@ -94,6 +154,23 @@ function GetPath
 
 }
 
+function CheckRights 
+{
+    if (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator"))
+    {
+        Write-Host " "
+        Write-Warning "Not enought rights!" 
+        Write-Warning "Opening a new window with eleveated rights" 
+        Start-Process PowerShell -ArgumentList $PSCommandPath -Verb RunAs  
+        Break 
+    }
+    else
+    {
+        Write-Host " "
+        Write-Host "Elevated rights detected" -ForegroundColor Green
+    }
+}
+
 
 [string]$Banner = "
     _  _____                             ___        _      _                    
@@ -105,6 +182,9 @@ function GetPath
 
 Clear-Host
 Write-Host "$Banner"
+
+CheckRights
+
 $UserToOperate = UserSelection
 
 do 

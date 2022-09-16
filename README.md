@@ -42,12 +42,12 @@ This will show were the current bridge  is created.
 
 # RoadBook
 
-[:white_check_mark:] Banner and Menu
-[:white_check_mark:] List of the device users
-[:white_check_mark:] Get the current bridge (if exists)
-[:heavy_exclamation_mark:] Creation of the permanent link
-[:heavy_exclamation_mark:] Creation of the temporal link
-[:heavy_exclamation_mark:] Colors for the interface
+- [:white_check_mark:] Banner and Menu
+- [:white_check_mark:] List of the device users
+- [:white_check_mark:] Get the current bridge (if exists)
+- [:heavy_exclamation_mark:] Creation of the permanent link
+- [:heavy_exclamation_mark:] Creation of the temporal link
+- [:heavy_exclamation_mark:] Colors for the interface
 
 # Support
 
