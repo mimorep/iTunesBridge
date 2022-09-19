@@ -62,3 +62,5 @@ This will show were the current bridge  is created.
 If you liked the project and want to have an account, you can support my work here:
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/C0C1EGEYL)
+
+<a href="https://www.buymeacoffee.com/M7Dev" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
