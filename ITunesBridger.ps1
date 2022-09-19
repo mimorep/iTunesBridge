@@ -173,30 +173,6 @@ function ChangePath
 
 }
 
-# Function that changes the bridge icon
-function ChangeIcon
-{
-    #TODO: Descomentar para que funcione con parametro
-    #param ([string]$Target="")
-
-    # Add drawing dependency
-    Add-Type -AssemblyName System.Drawing
-
-
- 
-
-    #TODO: Sacar bien el base64
-    $Image = [Drawing.Bitmap]::FromStream([IO.MemoryStream][Convert]::FromBase64String([convert]::ToBase64String((Get-Content .\Logo.JPG -Encoding byte))))
-
-
-    mkdir prueba
-
-    $Target = ".\prueba"
-
-    
-
-}
-
 # Funtion to list and select the user to operate with
 function UserSelection 
 {
