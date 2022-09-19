@@ -21,7 +21,11 @@ cd iTunesBridge
 .\ITunesBridger.ps1
 ```
 
-If you want to get the *.exe* binary, just go to the [release] section and donwload it.
+If you want to get the *.exe* binary, just go to the [release] section and donwload it, and run it with:
+
+```
+.\ITunesBridger.exe
+```
 
 [release]: https://github.com/mimorep/iTunesBridge/releases
 
