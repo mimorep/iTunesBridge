@@ -55,7 +55,8 @@ This will show were the current bridge  is created.
 - [:white_check_mark:] Creation of the permanent link
 - [:white_check_mark:] Creation of the temporal link
 - [:white_check_mark:] Colors for the interface
-- [:heavy_exclamation_mark:] Create a release version
+- [:white_check_mark:] Create a release version
+- [:heavy_exclamation_mark:] GUI interface for non IT?
 
 # Support
 
